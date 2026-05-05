@@ -312,7 +312,12 @@ if extract_button:
             if suggested_competitors:
                 st.session_state.competitors = suggested_competitors
 
-            st.success("Listing fields structured successfully with Gemini.")
+            if structured_fields.get("source") == "Gemini Structured Extraction":
+                st.success(
+                    "Listing fields structured successfully with Gemini.")
+            else:
+                st.warning(
+                    "Raw listing text extracted. Please review or edit the fields before running the audit.")
 
             st.caption(
                 f"Extraction source: Jina Reader + {structured_fields.get('source', 'Gemini')}. "
