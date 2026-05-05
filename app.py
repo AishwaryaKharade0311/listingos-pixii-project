@@ -154,27 +154,19 @@ def generate_pixii_creative_brief(title, description, buyer_question):
 
     if "senior" in text or "seniors" in text:
         target_user = "senior adults"
-        lifestyle_scene = (
-            "a calm senior adult using the product as part of a daily routine"
-        )
+        lifestyle_scene = "a calm senior adult using the product as part of a daily routine"
     elif "fitness" in text or "muscle" in text or "recovery" in text:
         target_user = "fitness-focused adults"
         lifestyle_scene = "an active person using the product after a workout or during recovery"
     elif "skin" in text or "beauty" in text:
         target_user = "beauty and wellness shoppers"
-        lifestyle_scene = (
-            "a clean beauty-style scene showing the product in a daily self-care routine"
-        )
-    elif "earphone" in text or "audio" in text or "music" in text or "musician" in text:
+        lifestyle_scene = "a clean beauty-style scene showing the product in a daily self-care routine"
+    elif "earphone" in text or "earbud" in text or "audio" in text or "music" in text or "musician" in text:
         target_user = "music lovers, creators, and audio-focused shoppers"
-        lifestyle_scene = (
-            "a musician or creator using the product in a clean desk or studio setup"
-        )
+        lifestyle_scene = "a musician or creator using the product in a clean desk or studio setup"
     else:
         target_user = "category-relevant shoppers"
-        lifestyle_scene = (
-            "a clean lifestyle scene showing the product in a realistic use case"
-        )
+        lifestyle_scene = "a clean lifestyle scene showing the product in a realistic use case"
 
     creative_brief = [
         {
@@ -317,7 +309,8 @@ if extract_button:
                     "Listing fields structured successfully with Gemini.")
             else:
                 st.warning(
-                    "Raw listing text extracted. Please review or edit the fields before running the audit.")
+                    "Raw listing text extracted. Please review or edit the fields before running the audit."
+                )
 
             st.caption(
                 f"Extraction source: Jina Reader + {structured_fields.get('source', 'Gemini')}. "
@@ -345,7 +338,6 @@ product_description = st.text_area(
     placeholder="Paste the product description, bullets, benefits, ingredients, certifications, etc.",
     height=320,
 )
-
 
 buyer_question = st.text_input(
     "Buyer Question",
@@ -418,7 +410,6 @@ if analyze_button:
             "Higher Creative Opportunity means the listing has more room for Pixii-style image, copy, and A+ content improvements."
         )
 
-        # AI + AEO analysis generated once and reused throughout the report.
         ai_analysis = generate_gemini_analysis(
             product_title,
             product_description,
@@ -447,19 +438,15 @@ if analyze_button:
 
         with summary_col1:
             st.info(
-                f"**Overall Verdict:** {executive_summary['overall_verdict']}"
-            )
+                f"**Overall Verdict:** {executive_summary['overall_verdict']}")
             st.warning(
-                f"**Biggest Weakness:** {executive_summary['biggest_weakness']}"
-            )
+                f"**Biggest Weakness:** {executive_summary['biggest_weakness']}")
 
         with summary_col2:
             st.success(
-                f"**Biggest Opportunity:** {executive_summary['biggest_opportunity']}"
-            )
+                f"**Biggest Opportunity:** {executive_summary['biggest_opportunity']}")
             st.info(
-                f"**Recommended Next Move:** {executive_summary['recommended_next_move']}"
-            )
+                f"**Recommended Next Move:** {executive_summary['recommended_next_move']}")
 
         st.divider()
 
