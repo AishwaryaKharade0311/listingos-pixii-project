@@ -6,6 +6,23 @@ import google.generativeai as genai
 load_dotenv()
 
 
+def get_gemini_api_key():
+    """
+    Gets Gemini API key from local .env or Streamlit Cloud secrets.
+    """
+
+    api_key = get_gemini_api_key()
+
+    if api_key:
+        return api_key
+
+    try:
+        import streamlit as st
+        return st.secrets.get("GEMINI_API_KEY", "")
+    except Exception:
+        return ""
+
+
 def clean_listing_text(text):
     """
     Cleans messy markdown-style extracted listing text into a readable format.
@@ -148,7 +165,7 @@ def generate_gemini_analysis(product_title, product_description, buyer_question,
     Falls back safely if the API key is missing or the API call fails.
     """
 
-    api_key = os.getenv("GEMINI_API_KEY")
+    api_key = get_gemini_api_key()
 
     if not api_key:
         return generate_fallback_ai_analysis(
