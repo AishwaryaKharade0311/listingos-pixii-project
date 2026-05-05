@@ -699,11 +699,11 @@ Rules:
             "source": "Gemini Structured Extraction",
         }
 
-    except Exception as e:
+    except Exception:
         return {
             "product_title": inferred_title,
             "product_description": cleaned_raw_text,
             "buyer_question": inferred_question,
             "competitors": inferred_competitors,
-            "source": f"Fallback Structured Extraction — Gemini error: {str(e)}",
+            "source": "Fallback Structured Extraction",
         }
